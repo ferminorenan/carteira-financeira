@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: codeigniter_app_postgres
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html:cached
+      - /var/www/html/writable
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
